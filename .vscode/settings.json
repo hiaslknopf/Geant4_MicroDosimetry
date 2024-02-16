@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "LoadPlotNtuple.C": "cpp",
+        "*.icc": "cpp",
+        "ProcessMicro.C": "cpp"
+    }
+}

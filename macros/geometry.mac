@@ -1,0 +1,45 @@
+################################################################################################
+# Uncomment a line to select a specific detector type
+# Leave everything commented to use the default one
+################################################################################################
+
+################################################################################################
+##### PHANTOM
+################################################################################################
+
+# Uncomment the following line to place the detector in/behind a phantom
+# Otherwise default is Vacuum
+#/geometrySetup/selectPhantom Water
+#/geometrySetup/selectPhantom RW3
+#/geometrySetup/selectPhantom Vacuum
+
+# If the water phantom is used, uncomment the following line to set a custom depth in water
+# The detector is placed 2.5cm behind the RW3 Phantom by default
+#/geometrySetup/detectorPosition/setDepth 50 mm
+
+################################################################################################
+##### DETECTOR
+################################################################################################
+
+#/geometrySetup/selectDetector CNMSiC
+#/geometrySetup/selectDetector IISBSiC
+
+#/geometrySetup/selectDetector Diamond
+#/geometrySetup/selectDetector MicroDiamond
+#/geometrySetup/selectDetector Silicon
+#/geometrySetup/selectDetector SiliconBridge
+#/geometrySetup/selectDetector DiamondTelescope
+
+# Uncomment to change the detector's width and/or thickness
+# Otherwise default values are used
+#/geometrySetup/detectorDimension/setWidth 30 um
+#/geometrySetup/detectorDimension/setThickness 10 um
+
+# If DiamondTelescope is selected, uncomment to change the telescope's width and/or thickness
+# Otherwise default values are used
+#/geometrySetup/detectorDimension/secondStage/setWidth 500 um
+#/geometrySetup/detectorDimension/secondStage/setThickness 800 um
+
+##################################################################################################
+# The above commands are only applied if the following line is uncommented
+/geometrySetup/applyChanges
