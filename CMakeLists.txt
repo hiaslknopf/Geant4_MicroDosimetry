@@ -40,20 +40,33 @@ add_executable(exp_microdosimetry exp_microdosimetry exp_microdosimetry.cc ${sou
 target_link_libraries(exp_microdosimetry ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
-# Copy all scripts to the build directory, i.e. the directory in which we
-# build basic_exp_microdosimetry. This is so that we can run the executable directly because it
-# relies on these scripts being in the current working directory.
-#
-set(exp_microdosimetry_SCRIPTS
-   macros/*.mac analysis*.C analysis*.py)
+# Find all .mac files in macros subdirectory
+file(GLOB_RECURSE exp_microdosimetry_MACROS
+     "${PROJECT_SOURCE_DIR}/macros/*.mac")
 
+# Find .C and .py files specifically in the analysis subdirectory
+file(GLOB_RECURSE exp_microdosimetry_C_FILES
+     "${PROJECT_SOURCE_DIR}/analysis/*.C")
+file(GLOB_RECURSE exp_microdosimetry_PY_FILES
+     "${PROJECT_SOURCE_DIR}/analysis/*.py")
+
+# Combine all found files into a list
+set(exp_microdosimetry_SCRIPTS ${exp_microdosimetry_MACROS} ${exp_microdosimetry_C_FILES} ${exp_microdosimetry_PY_FILES})
+
+# Copy each found file to the build directory
 foreach(_script ${exp_microdosimetry_SCRIPTS})
-  configure_file(
-    ${PROJECT_SOURCE_DIR}/${_script}
-    ${PROJECT_BINARY_DIR}/${_script}
-    COPYONLY
-    )
+  get_filename_component(_script_name "${_script}" NAME)
+  get_filename_component(_script_path "${_script}" PATH)
+  file(RELATIVE_PATH _relative_path "${PROJECT_SOURCE_DIR}" "${_script_path}")
+  
+  # Ensure the target directory exists
+  file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/${_relative_path}")
+  
+  file(COPY ${_script} DESTINATION "${PROJECT_BINARY_DIR}/${_relative_path}")
 endforeach()
+
+# Create an empty /analysis/output directory in the build directory if it doesn't already exist
+file(MAKE_DIRECTORY "${PROJECT_BINARY_DIR}/analysis/output")
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
