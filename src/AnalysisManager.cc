@@ -71,7 +71,7 @@ void AnalysisManager::book(G4bool addExtraNt)
   G4String outputFolder = "analysis/output/";
 
   if( usingRoot == true ) fileName = outputFolder + usingName + ".root";
-  else fileName = fileName = outputFolder + usingName + ".csv";
+  else fileName = outputFolder + usingName + ".csv";
 
   // Create directories (not supported by csv)
   if( usingRoot == true ) manager->SetNtupleDirectoryName(outputFolder + usingName + "_ntuple");

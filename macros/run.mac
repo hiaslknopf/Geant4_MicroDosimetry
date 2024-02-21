@@ -1,3 +1,5 @@
+/control/macroPath macros
+
 /control/execute geometry.mac
 #control the physics
 /control/execute physics.mac

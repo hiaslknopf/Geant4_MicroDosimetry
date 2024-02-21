@@ -2,14 +2,16 @@
 # THE SIMULATION IS EXECUTE IN INTERACTIVE MODE
 #
 #
+/control/macroPath macros
+
 /control/execute geometry.mac
 /control/execute physics.mac
 /control/execute output.mac
 /run/initialize
-/control/execute primary.mac
+/control/execute source.mac
 #
 # Open a viewer
-/vis/open
+/vis/open OGLIQt
 # This opens the default viewer - see examples/basic/B1/vis.mac for a
 # more comprehensive overview of options. Also the documentation.
 #

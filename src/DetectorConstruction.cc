@@ -213,7 +213,7 @@ void DetectorConstruction::ConstructWorldWithWaterPhantom()
 	G4LogicalVolume* logical_world = new G4LogicalVolume(world, air, "world_log", 0,0,0);
 	
 	//set the logical world volume invisible
-	logical_world -> SetVisAttributes(G4VisAttributes::GetInvisible());
+	//logical_world -> SetVisAttributes(G4VisAttributes::GetInvisible());
 	
 	physical_world = new G4PVPlacement(0,
 								G4ThreeVector(),
@@ -246,7 +246,7 @@ void DetectorConstruction::ConstructWorldWithWaterPhantom()
 				logical_phantom, 
 				false, 0, 0);
 	
-	logical_inner -> SetVisAttributes(G4VisAttributes::GetInvisible());
+	//logical_inner -> SetVisAttributes(G4VisAttributes::GetInvisible());
 	
 	// private member of DetectorConstruction,
 	// needed as mother volume for Construct*Detector()
@@ -494,13 +494,14 @@ new G4PVPlacement(0, G4ThreeVector(-245*um,0,DiaVol_z - heightOfTheTube3 - Bdl_z
 
 // Visualisation attributes
 
-        logical_DiaVol -> SetVisAttributes(G4VisAttributes(G4Colour(255,255,255))); //white
+    //logical_DiaVol -> SetVisAttributes(G4VisAttributes(G4Colour(255,255,255))); //white
+	logical_DiaVol -> SetVisAttributes(G4VisAttributes::GetInvisible());
 	logical_Bdl -> SetVisAttributes(G4VisAttributes(G4Colour(0,255,0)));        //green
 	
-	G4VisAttributes vis_SV(G4Colour(198, 226, 255));
+	G4VisAttributes vis_SV(G4Colour(255, 0, 255)); //pink
 	vis_SV.SetForceSolid(true);
 	logical_SV -> SetVisAttributes(vis_SV);
-        logical_vacblock -> SetVisAttributes(G4VisAttributes::GetInvisible());		
+        //logical_vacblock -> SetVisAttributes(G4VisAttributes::GetInvisible());		
 	logical_AlStrip -> SetVisAttributes(G4VisAttributes(G4Colour(0, 255, 255)));//cyan
 	
 	G4VisAttributes vis_GoldCylinder1(G4Colour(255, 255, 0));                    
@@ -855,7 +856,7 @@ void DetectorConstruction::ConstructSiliconDetector()
 					logical_motherVolumeForDetector,
 					false, 0, true);
 	
-	logical_PMMA -> SetVisAttributes(G4VisAttributes(G4Colour(0., 1., 0.)));
+	logical_PMMA -> SetVisAttributes(G4VisAttributes(G4Colour(102,178,255))); //light blue
 	
 	// sensitive volumes
 	G4double SV_radius = detectorSizeWidth /2.;	// full length
@@ -867,7 +868,7 @@ void DetectorConstruction::ConstructSiliconDetector()
 		
 	G4LogicalVolume* logical_SV = new G4LogicalVolume(SV_cyl, silicon, "SV_log", 0,0,0);
 	
-	G4VisAttributes SVcolour(G4Colour(0.5, 0.5, 0.5));
+	G4VisAttributes SVcolour(G4Colour(255,0,255)); //pink
 	SVcolour.SetForceSolid(true);
 	logical_SV -> SetVisAttributes(SVcolour);
 	
@@ -910,7 +911,7 @@ void DetectorConstruction::ConstructSiliconDetector()
 					logical_motherVolumeForDetector,
 					false, 0, true);
 	
-	logical_oxyde -> SetVisAttributes(G4VisAttributes(G4Colour(0.6, 0.6, 0.6)));
+	logical_oxyde -> SetVisAttributes(G4VisAttributes(G4Colour(0, 255, 0))); //green
 }
 
 void DetectorConstruction::ConstructSiliconBridgeDetector()

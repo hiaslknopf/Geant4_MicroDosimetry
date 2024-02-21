@@ -32,6 +32,7 @@
 
 class G4UIdirectory;
 class G4UIcmdWithABool;
+class G4UIcmdWithAString;
 
 class AnalysisMessenger: public G4UImessenger
 {
@@ -43,16 +44,17 @@ public:
   
   // functions to read parameters
   G4bool IsRootOutput() { return rootOutput; }
-  G4String GetFileName() { return fileName; }
+  G4String GetFileName() { return useName; }
   
 private:
   G4UIdirectory *analysisDir;      // UI directory
   
   G4UIcmdWithABool *useRootForOutput;
+  G4UIcmdWithAString *useCustomFileName;
   
   // parameters to store
   G4bool rootOutput;
-  G4String fileName;
+  G4String useName;
 };
 #endif
 

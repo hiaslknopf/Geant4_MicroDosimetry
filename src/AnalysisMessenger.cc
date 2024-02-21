@@ -26,6 +26,7 @@
 #include "AnalysisMessenger.hh"
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithABool.hh"
+#include "G4UIcmdWithAString.hh"
 
 AnalysisMessenger::AnalysisMessenger()
 {
@@ -37,13 +38,20 @@ AnalysisMessenger::AnalysisMessenger()
 	useRootForOutput -> SetParameterName("Root", true);
 	useRootForOutput -> AvailableForStates(G4State_PreInit);
 	
+	useCustomFileName = new G4UIcmdWithAString("/analysis/fileName", this);
+	useCustomFileName -> SetGuidance("Set the name of the output file");
+	useCustomFileName -> SetParameterName("fileName", true);
+	useCustomFileName -> AvailableForStates(G4State_PreInit);
+
 	//default
 	rootOutput = true;
+	useName = "output";
 }
 
 AnalysisMessenger::~AnalysisMessenger()
 {
 	delete useRootForOutput;
+	delete useCustomFileName;
 	
 	delete analysisDir;
 }
@@ -54,7 +62,7 @@ void AnalysisMessenger::SetNewValue(G4UIcommand* command, G4String commandConten
 	if( command == useRootForOutput )
 	{
 		rootOutput = G4UIcmdWithABool::GetNewBoolValue(commandContent);
-		
+		useName = commandContent;
 		if( rootOutput == true ) G4cout << "Outputting to a ROOT file" << G4endl;
 		else G4cout << "Outputting to a csv file" << G4endl;
 	}
