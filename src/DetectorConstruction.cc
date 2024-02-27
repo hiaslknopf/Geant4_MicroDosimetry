@@ -138,7 +138,7 @@ void DetectorConstruction::ConstructWorldWithRW3Phantom()
 	G4Material* diamond = new G4Material("diamond", Z, A, 3.515*g/cm3);
 				
 	//Define RW3
-	G4Material* rw3 = new G4Material("RW3", 3.514*g/cm3, 4);
+	G4Material* rw3 = new G4Material("RW3", 3.514*g/cm3, 2);
 	rw3 -> AddElement(elC, 99.9994*perCent);
 	rw3 -> AddElement(elB, 0.0006*perCent);
 	
